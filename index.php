@@ -25,7 +25,7 @@ if(isset($_POST['mail'])){
         <div class="mb-3 text-center mt-5">
             <form action="index.php" method="POST">
                 <label for="mail" class="form-label">Email address</label>
-                <input type="text" class="form-control" name="mail" id="mail" placeholder="<?php echo isset($mail) ? $mail : ''?>">
+                <input type="text" class="form-control" name="mail" id="mail" value="<?php echo !empty($_POST['mail']) ? $_POST['mail'] : ''?>">
                 <?php if(!isset($result)) { ?>
                     <h3>Inserire Email</h3>
                 <?php } else {?>
