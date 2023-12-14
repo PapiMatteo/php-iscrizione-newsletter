@@ -1,9 +1,11 @@
 <?php 
+// $pattern = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i";
+// preg_match($pattern, $email)
+include_once __DIR__ . '/function.php';
 
 if(isset($_POST['mail'])){
     $mail = $_POST['mail'];
-} else {
-    $mail = '';
+    $result = controlEmail($mail);
 }
 
 
@@ -23,8 +25,12 @@ if(isset($_POST['mail'])){
         <div class="mb-3 text-center mt-5">
             <form action="index.php" method="POST">
                 <label for="mail" class="form-label">Email address</label>
-                <input type="text" class="form-control" name="mail" id="mail" placeholder="<?php echo $mail ?>">
-                <?php include './function.php' ?>
+                <input type="text" class="form-control" name="mail" id="mail" placeholder="<?php echo isset($mail) ? $mail : ''?>">
+                <?php if(!isset($result)) { ?>
+                    <h3>Inserire Email</h3>
+                <?php } else {?>
+                    <h3 class="mt-2 alert <?php echo $result ? 'alert-success' : 'alert-danger' ?>">Email <?php echo $result ? 'Valida' : 'non valida' ?></h3> 
+                <?php } ?>
                 <button type="submit" class="btn btn-primary mt-3">Invia</button>
             </form>
             
